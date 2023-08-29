@@ -1,7 +1,7 @@
 import java.util.Locale;
 
 public class Formatter {
-    String rubFullFormat(double d) { // Вывод отформатирвоанной суммы в рублях
+    String rubFullFormat(double d) { // Вывод отформатированной суммы в рублях
         return rubCostFormat(d) + " " + rubNameFormat(d);
     }
 
@@ -11,19 +11,18 @@ public class Formatter {
     }
 
     String rubNameFormat(double d) { // Склонение валюты
-        String rubI = "Рубль";
-        String rubM = "Рублей";
-        String rubS = "Рубля";
-        d = Math.floor(d);
+        String[] rubForms = {"рубль", "рублей", "рубля"};
         int mod = (int) (d % 100);
-        int div = (mod / 10);
-        int res = (mod > 19) ? (mod - div * 10) : mod;
-        if (res == 1) {
-            return rubI;
-        } else if (res < 5 && res > 1) {
-            return rubS;
-        } else {
-            return rubM;
+        int res = (mod > 19) ? (mod % 10) : mod;
+        switch (res) {
+            case 1:
+                return rubForms[0];
+            case 2:
+            case 3:
+            case 4:
+                return rubForms[2];
+            default:
+                return rubForms[1];
         }
     }
 }
