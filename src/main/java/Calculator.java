@@ -18,7 +18,9 @@ public class Calculator {
         System.out.println(this.formatter.rubFullFormat((this.products.prodCost / this.friends.friendsCount)));
         // Если сумма не делится без остатка
         double d = checkBalance();
-        if (!(d == 0.0d)) {
+        if (d<0.0d){
+            System.out.print("И " + this.formatter.rubFullFormat(Math.abs(d)) + ", кто то может не платить.");
+        }else if(d>0.0d){
             System.out.print("И " + this.formatter.rubFullFormat(d) + ", кто то должен добавить.");
         }
     }
